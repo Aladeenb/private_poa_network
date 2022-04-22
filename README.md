@@ -6,7 +6,7 @@ Docker image for Ethereum testnet using proof-of-authority consensus protocol ba
 Clone the repository
 
 ```console
-git clone https://github.com/bellaj/PrivatePoA.git && cd PrivatePoA
+git clone https://github.com/Ethereumx/private_poa_network.git && cd private_poa_network
 ```
 ## Building
 
