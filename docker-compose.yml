@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  geth:
+    image: cmr/geth-poa:latest
+    environment:
+       - ETH_PASSWORD=cmrAccount@724*
+       - ETH_PRIVATE_KEY=a85c9e1ce557f963d221ae895ddfa3e3e7490f83d61ed3d56e2060a1d34cf61e
+       - ETH_ADDRESS=0x9855CC753029eF19071f2ceBC7Fdb6F99F986474
+    ports:
+      - 8545:8545
+      - 8546:8546
+      - 30303:30303
+    volumes:
+      - ./genesis.json:/app/genesis.json
+      - ./static-nodes.json:/app/static-nodes.json
+      - /data
+  blockscout:
+    image: ulamlabs/blockscout:latest
+    links:
+      - geth
+      - postgres
+    ports:
+      - 4000:4000
+    environment:
+      - DATABASE_URL=postgresql://postgres:@postgres:5432/postgres?ssl=false
+      - ETHEREUM_JSONRPC_VARIANT=geth
+      - ETHEREUM_JSONRPC_HTTP_URL=http://geth:8545
+      - ETHEREUM_JSONRPC_WS_URL=ws://geth:8546
+      - MIX_ENV=prod
+      - BLOCKSCOUT_HOST=localhost
+      - COIN=eth
+      - NETWORK=POA
+      - SUBNETWORK=Local Testnet
+
+  postgres:
+    image: postgres:12
+    command: postgres -c 'max_connections=500'
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust

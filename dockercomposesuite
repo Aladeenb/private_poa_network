@@ -1,0 +1,23 @@
+  blockscout:
+    image: ulamlabs/blockscout:latest
+    links:
+      - geth
+      - postgres
+    ports:
+      - 4000:4000
+    environment:
+      - DATABASE_URL=postgresql://postgres:@postgres:5432/postgres?ssl=false
+      - ETHEREUM_JSONRPC_VARIANT=geth
+      - ETHEREUM_JSONRPC_HTTP_URL=http://geth:8545
+      - ETHEREUM_JSONRPC_WS_URL=ws://geth:8546
+      - MIX_ENV=prod
+      - BLOCKSCOUT_HOST=localhost
+      - COIN=eth
+      - NETWORK=POA
+      - SUBNETWORK=Local Testnet
+
+  postgres:
+    image: postgres:12
+    command: postgres -c 'max_connections=500'
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust

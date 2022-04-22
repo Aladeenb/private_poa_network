@@ -1,0 +1,19 @@
+[Eth]
+SyncMode = "full"
+NoPruning = true
+
+[Node]
+DataDir = "/data"
+IPCPath = "geth.ipc"
+HTTPHost = "0.0.0.0"
+HTTPPort = 8545
+HTTPCors = ["*"]
+HTTPVirtualHosts = ["*"]
+HTTPModules = ["db","eth","net","web3","personal","txpool","miner","debug","admin"]
+WSHost = "0.0.0.0"
+WSPort = 8546
+WSOrigins = ["*"]
+
+[Node.P2P]
+MaxPeers = 5
+NoDiscovery = true
