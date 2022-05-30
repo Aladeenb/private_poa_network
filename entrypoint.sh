@@ -21,7 +21,7 @@ cp static-nodes.json .static-nodes.json
 export BOOTNODE=`cat static-nodes.json`
 # replace_env .genesis.json
 # replace_env .config.toml
-echo "----------------CMR Node Configuration---------------------"
+echo "----------------POA Node Configuration---------------------"
 echo cmrAccount@724* > /tmp/eth_pass
 echo a85c9e1ce557f963d221ae895ddfa3e3e7490f83d61ed3d56e2060a1d34cf61e > /tmp/eth_private_key
 geth account new --datadir data --password /tmp/eth_pass
