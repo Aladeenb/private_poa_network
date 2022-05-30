@@ -1,4 +1,4 @@
-# CMR-poa-Blockchain :hammer:
+# private-poa-Blockchain :hammer:
 
 Docker image for Ethereum testnet using proof-of-authority consensus protocol based on Geth's latest version. By default two accounts will be created, one serving as a signer and another one which holds all the coins on the testnet.
 
@@ -11,14 +11,14 @@ git clone https://github.com/Ethereumx/private_poa_network.git && cd private_poa
 ## Building
 
 ```console
-$ docker build -t cmr/geth-poa:latest .
+$ docker build -t poa/geth-poa:latest .
 ```
 
 
 
 # test container alone
 ```console
-$ docker run -p 8545:8545 -p 8456:8456 cmr/geth-poa:latest
+$ docker run -p 8545:8545 -p 8456:8456 poa/geth-poa:latest
 ```
 ## Start peer
 If test is ok you can start containers using
@@ -58,7 +58,7 @@ enode://...@9[::]:30301
 ```
 # LOG
 check container's log using :
-`docker logs -f cmrdocker_geth_1`
+`docker logs -f poadocker_geth_1`
 # Upgrade
 
 Blockscout doesn't support 1.10 (latest geth)
@@ -99,22 +99,15 @@ clique": {
     },
 ```
 
-## Upgrade (TODO)
-
-The current script uses hardcoded information, you can change that by using environment variables such as :
-
-- `ETH_PASSWORD` - password for keystore file,
-- `ETH_PRIVATE_KEY` - signer account private key,
-- `ETH_ADDRESS` - signer account address,
-- `ETH_BUFFER` - account which holds all the coins,
-- `ETH_CHAIN_ID` - chain ID, defaults to 5555
 
 You can override `genesis.json` by mounting your own at `/app`. Please bear in mind that `$ETH_ADDRESS` and `$ETH_BUFFER` strings will be replaced with the environment variables.
 
-## Running a Bootnode
+# Running a Bootnode
 Generate a key and start the boot node on any random port
+```
 bootnode -genkey boot.key
 bootnode -nodekey -addr :8009
+```
 
 
 ## precompiled contract
