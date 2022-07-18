@@ -20,6 +20,25 @@ $ docker build -t poa/geth-poa:latest .
 ```console
 $ docker run -p 8545:8545 -p 8456:8456 poa/geth-poa:latest
 ```
+
+## Troubleshooting
+- **Error:** ```/bin/sh: /app/entrypoint.sh: not found```
+- **Reason:** occurs when using Docker Windows, files are saved with Windows line endings (CRLF) rather than Unix's (LF).
+- **solution:** proceed with the following steps
+1. Convert ```entrypoint.sh``` file from CRLF to LF:
+```console
+dos2unix entrypoint.sh
+``` 
+2. Delete the generated testing container (because you don't need it anymore):
+```console
+docker rm container_id
+```
+3. Retest the container:
+```console
+docker build -t poa/geth-poa:latest .
+```
+Now you can move on to the next step.
+
 ## Start peer
 If test is ok you can start containers using
 
